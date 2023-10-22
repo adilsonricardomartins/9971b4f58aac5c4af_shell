@@ -99,11 +99,10 @@ sudo cp /etc/opendkim/keys/$DKIMSelector.txt /root/dkim.txt && sudo chmod -R 777
 
 DKIMFileCode=$(cat /root/dkim.txt)
 
-sudo cat <<EOF > /root/dkimcode.sh
-#!/usr/bin/node
-const DKIM = `$DKIMFileCode`
+echo '#!/usr/bin/node
+const DKIM = `'$DKIMFileCode'`
 console.log(DKIM.replace(/(\r\n|\n|\r|\t|"|\)| )/gm, "").split(";").find((c) => c.match("p=")).replace("p=",""))
-EOF
+'| sudo tee /root/dkimcode.sh > /dev/null
 
 sudo chmod 777 /root/dkimcode.sh
 
