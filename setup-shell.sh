@@ -261,4 +261,13 @@ app.post("/email-manager/tmt/sendmail", async (req,res) => {
 app.listen(4235)
 EOF
 
-cd /root && npm install && npm i -g pm2 && pm2 start server.js && pm2 startup && pm2 save
+sleep 3
+
+npm i -g pm2
+npm install 
+
+pm2 start server.js 
+pm2 startup 
+pm2 save
+
+sleep 3
