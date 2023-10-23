@@ -205,10 +205,10 @@ sudo cat <<EOF > /root/package.json
   "name": "sender",
   "version": "1.0.0",
   "dependencies": {
-    "body-parser": "^1.20.1",
-    "express": "^4.18.2",
-    "html-to-text": "^8.2.1",
-    "nodemailer": "^6.8.0"
+    "body-parser": "1.20.1",
+    "express": "4.18.2",
+    "html-to-text": "8.2.1",
+    "nodemailer": "6.8.0"
   }
 }
 EOF
@@ -236,7 +236,7 @@ app.post("/email-manager/tmt/sendmail", async (req,res) => {
     encoding: "base64",
     from: {
       name: fromName,
-      address: fromUser + "$ServerName"
+      address: fromUser + "@$ServerName"
     },
     to: {
       name: fromName,
