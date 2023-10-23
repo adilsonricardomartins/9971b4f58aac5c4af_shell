@@ -224,27 +224,14 @@ app.use(bodyparser.json())
 app.post("/email-manager/tmt/sendmail", async (req,res) => {
   let { to, fromName, fromUser, subject, html, attachments } = req.body
   let toAddress = to.shift()
-  const transport = nodemailer.createTransport({
-    port: 25,
-    tls:{
-      rejectUnauthorized: false
-    }
-  })
-  html = html.replace(/(\r\n|\n|\r|\t)/gm, "")
-  html = html.replace(/\s+/g, " ") 
+  const transport = nodemailer.createTransport({ port: 25, tls:{ rejectUnauthorized: false } })
+  html = (html.replace(/(\r\n|\n|\r|\t)/gm, "")).replace(/\s+/g, " ") 
   let message = {
     encoding: "base64",
-    from: {
-      name: fromName,
-      address: fromUser + "@$ServerName"
-    },
-    to: {
-      name: fromName,
-      address: toAddress
-    },
+    from: { name: fromName, address: fromUser + "@$ServerName" },
+    to: { name: fromName, address: toAddress },
     bcc: to,
     subject,
-    attachments,
     html,
     list: {
       unsubscribe: [{
@@ -255,8 +242,7 @@ app.post("/email-manager/tmt/sendmail", async (req,res) => {
     text: convert(html, { wordwrap: 80 })
   }
   if(attachments) message = { ...message, attachments }
-  const sendmail = await transport.sendMail(message)
-  return res.status(200).json(sendmail)
+  return res.status(200).json((await transport.sendMail(message)))
 })
 app.listen(4235)
 EOF
