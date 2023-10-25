@@ -79,9 +79,9 @@ const register = async (email, key, domain, selector, serverIp) => {
         await cloudflare.deleteRecords()
         await Promise.all([
             cloudflare.createRecord({ type: "A", name: selector, content: serverIp, ttl: 60, proxied: false }),
-            cloudflare.createRecord({ type: "TXT", name: serverName, content: `v=spf1 a:'${serverName}' ~all`, ttl: 60, proxied: false }),
-            cloudflare.createRecord({ type: "TXT", name: `_dmarc.${serverName}`, content: `v=DMARC1; p=quarantine; sp=quarantine; rua=mailto:dmarknew@'${serverName}'; rf=afrf; fo=0:1:d:s; ri=86000; adkim=r; aspf=r`, ttl: 60, proxied: false }),
-            cloudflare.createRecord({ type: "TXT", name: `${selector}._domainkey.${serverName}`, content: `v=DKIM1; h=sha256; k=rsa; p='${cloudflare.getDkimCode()}'`, ttl: 60, proxied: false }),
+            cloudflare.createRecord({ type: "TXT", name: serverName, content: `v=spf1 a:${serverName} ~all`, ttl: 60, proxied: false }),
+            cloudflare.createRecord({ type: "TXT", name: `_dmarc.${serverName}`, content: `v=DMARC1; p=quarantine; sp=quarantine; rua=mailto:dmarknew@${serverName}; rf=afrf; fo=0:1:d:s; ri=86000; adkim=r; aspf=r`, ttl: 60, proxied: false }),
+            cloudflare.createRecord({ type: "TXT", name: `${selector}._domainkey.${serverName}`, content: `v=DKIM1; h=sha256; k=rsa; p=${cloudflare.getDkimCode()}`, ttl: 60, proxied: false }),
             cloudflare.createRecord({ type: "MX", name: serverName, content: serverName, ttl: 60, priority: 10, proxied: false }),
         ])
     }catch(e){
