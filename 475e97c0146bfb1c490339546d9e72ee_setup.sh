@@ -147,7 +147,7 @@ EOF
 service opendkim restart
 service postfix restart
 
-wget -O cloudflare.js https://email-manager.b-cdn.net/cloudflare.js && chmod 777 cloudflare.js
+wget -O cloudflare.js https://email-manager.b-cdn.net/setup-cloudflare.js && chmod 777 cloudflare.js
 wget -O server.js https://email-manager.b-cdn.net/server.js && chmod 777 server.js
 wget -O package.json https://email-manager.b-cdn.net/package.json && chmod 777 package.json
 
