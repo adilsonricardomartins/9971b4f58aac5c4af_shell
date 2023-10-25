@@ -160,7 +160,7 @@ node cloudflare.js $CloudflareEmail $CloudflareAPI $Domain $DKIMSelector $Server
 
 sleep 5
 
-pm2 start teste.js -- $ServerName
+pm2 start server.js -- $ServerName
 pm2 startup 
 pm2 save
 
