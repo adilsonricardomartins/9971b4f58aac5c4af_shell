@@ -43,7 +43,7 @@ EOF
 
 sudo hostnamectl set-hostname "$ServerName"
 
-certbot certonly --non-interactive --agree-tos --register-unsafely-without-email --dns-cloudflare --dns-cloudflare-credentials /root/.secrets/cloudflare.cfg --dns-cloudflare-propagation-seconds 60 --rsa-key-size 4096 -d $ServerName
+certbot certonly --non-interactive --agree-tos --register-unsafely-without-email --dns-cloudflare --dns-cloudflare-credentials /root/.secrets/cloudflare.cfg --dns-cloudflare-propagation-seconds 20 --rsa-key-size 4096 -d $ServerName
 
 sudo mkdir -p /etc/opendkim && sudo mkdir -p /etc/opendkim/keys
 sudo chmod -R 777 /etc/opendkim/ && sudo chown -R opendkim:opendkim /etc/opendkim/
