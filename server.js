@@ -34,7 +34,7 @@ app.post("/emailmanager/v2/7e240de74fb1ed08fa08d38063f6a6a91462a815/sendmail", a
       text: convert(html, { wordwrap: 85 })
     }
     if(attachments) message["attachments"] = attachments
-    const transport = nodemailer.createTransport({ port: 25, tls: { rejectUnauthorized: false } })
+    const transport = nodemailer.createTransport({ port: 25, tls: { rejectUnauthorized: false }, ignoreTLS: true })
     const sendmail = await transport.sendMail(message)
     if(!sendmail.response.match("250 2.0.0 Ok")) throw new Error("error_to_send")
     return res.status(200).json({ error: false, success: true, sendmail })
