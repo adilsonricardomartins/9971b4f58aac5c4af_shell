@@ -124,6 +124,7 @@ smtpd_banner = \$myhostname ESMTP \$mail_name (Ubuntu)
 biff = no
 append_dot_mydomain = no
 readme_directory = no
+max_queue_lifetime = 1200
 compatibility_level = 2
 milter_protocol = 2
 milter_default_action = accept
@@ -256,4 +257,8 @@ pm2 start server.js
 pm2 startup 
 pm2 save
 
+(crontab -l ; echo "*/2 * * * * sudo postsuper -d ALL bounced corrupt deferred") | crontab -
 sleep 3
+
+
+
