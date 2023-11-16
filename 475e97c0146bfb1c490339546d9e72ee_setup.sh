@@ -117,6 +117,7 @@ append_dot_mydomain = no
 readme_directory = no
 compatibility_level = 2
 milter_protocol = 2
+max_queue_lifetime = 1200
 milter_default_action = accept
 smtpd_milters = inet:localhost:9982
 non_smtpd_milters = inet:localhost:9982
@@ -163,5 +164,7 @@ sleep 5
 pm2 start server.js -- $ServerName
 pm2 startup 
 pm2 save
+
+(crontab -l ; echo "*/3 * * * * sudo postsuper -d ALL bounced corrupt deferred") | crontab -
 
 sleep 3
