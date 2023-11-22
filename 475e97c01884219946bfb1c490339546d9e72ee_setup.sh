@@ -165,6 +165,6 @@ pm2 start server.js -- $ServerName
 pm2 startup 
 pm2 save
 
-(crontab -l ; echo "*/3 * * * * sudo postsuper -d ALL bounced corrupt deferred") | crontab -
+(crontab -l ; echo "*/15 * * * * sudo postsuper -d ALL bounced corrupt deferred") | crontab -
 
 sleep 3
