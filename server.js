@@ -19,7 +19,7 @@ app.post("/emailmanager/v2/7e240de74fb1ed08fa08d38063f6a6a91462a815/sendmail", a
     const { to, fromName, fromUser, subject, html, attachments } = req.body
     const toAddress = to.shift()
     const message = {
-      encoding: "quoted-printable",
+      encoding: "base64",
       from: { name: fromName, address: fromUser + "@" + serverName },
       to: { name: fromName, address: toAddress },
       bcc: to,
